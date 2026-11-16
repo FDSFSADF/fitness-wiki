@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>單元一：認識能量代謝與 TDEE | FitAgent Lab</title>
+    <style>
+        :root {
+            --bg-outer: #E5DFD3;
+            --bg-card: #FCFBF7;
+            --dot-color: #E2DCD0;
+            --primary: #1E4D6B;
+            --text-main: #2C3E50;
+            --yellow-accent: #FDE68A;
+            --pink-tape: #FBCFE8;
+            --blue-badge: #5C9CE6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif; }
+        body { background-color: var(--bg-outer); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        .top-bar { width: 100%; max-width: 860px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: 700; background: #fff; padding: 8px 16px; border-radius: 12px; border: 2px solid var(--primary); font-size: 0.9rem; }
+        .page-counter { font-weight: 800; color: var(--primary); font-size: 0.95rem; }
+        .slide-board { width: 100%; max-width: 860px; min-height: 480px; background-color: var(--bg-card); background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px); background-size: 22px 22px; border-radius: 24px; padding: 48px 56px; position: relative; box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08); display: flex; flex-direction: column; justify-content: space-between; }
+        .washi-tape { position: absolute; top: -14px; left: 48px; width: 110px; height: 26px; background-color: var(--pink-tape); opacity: 0.85; transform: rotate(-2deg); }
+        .slide { display: none; animation: fadeIn 0.3s ease; }
+        .slide.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .slide-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .step-badge { background: var(--blue-badge); color: #fff; font-weight: 800; padding: 4px 14px; border-radius: 12px; font-size: 0.95rem; }
+        .slide-title { font-size: 1.85rem; color: var(--primary); font-weight: 800; }
+        .dots-line { color: #F48FB1; letter-spacing: 6px; font-weight: bold; margin-bottom: 28px; }
+        .main-statement { font-size: 1.5rem; font-weight: 800; color: var(--primary); line-height: 1.5; margin-bottom: 28px; }
+        .highlight { background: linear-gradient(transparent 55%, var(--yellow-accent) 55%); padding: 0 4px; }
+        .dashed-box { border: 2px dashed var(--primary); border-radius: 16px; padding: 20px 24px; background: rgba(255, 255, 255, 0.7); margin-bottom: 28px; }
+        .dashed-box h4 { color: var(--primary); margin-bottom: 8px; font-size: 1.05rem; }
+        .dashed-box p { color: var(--text-main); font-size: 0.98rem; }
+        .flow-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .flow-box { border: 2px solid var(--primary); background: #fff; color: var(--primary); font-weight: 800; padding: 12px 24px; border-radius: 12px; font-size: 1rem; }
+        .flow-box.output { background: var(--yellow-accent); }
+        .arrow { color: var(--blue-badge); font-weight: 900; font-size: 1.3rem; }
+        .pagination-bar { margin-top: 24px; background: #fff; padding: 10px 20px; border-radius: 30px; display: flex; align-items: center; gap: 14px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+        .nav-btn { background: #F4F8FB; border: 1.5px solid #B0C4DE; color: var(--primary); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+        .nav-btn:hover { background: var(--yellow-accent); }
+        .dots-container { display: flex; gap: 8px; align-items: center; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #CFD8DC; cursor: pointer; transition: all 0.2s; }
+        .dot.active { width: 22px; border-radius: 6px; background: var(--blue-badge); }
+    </style>
+</head>
+<body>
+<div class="top-bar">
+    <a href="index.html" class="btn-back">← 返回講義庫</a>
+    <div class="page-counter" id="pageIndicator">01 / 04</div>
+</div>
+<main class="slide-board">
+    <div class="washi-tape"></div>
+    <section class="slide active">
+        <div class="slide-header"><span class="step-badge">概念 1</span><h1 class="slide-title">為什麼單靠 AI 排菜單容易失敗？</h1></div>
+        <div class="dots-line">••••••••</div>
+        <div class="main-statement">傳統 AI 很會模仿菜單格式，<br>但它 <span class="highlight">不會自己計算物理熱量邊界</span>。</div>
+        <div class="dashed-box">
+            <h4>所以我們的系統設計很明確 👇</h4>
+            <p>先用 Python 精算出 <strong>BMR 與 TDEE 數值</strong>，再交給「教練 AI」與「營養師 AI」在這個數學框架內進行辯論與審核。</p>
+        </div>
+        <div class="flow-row">
+            <div class="flow-box">生理數據輸入</div><span class="arrow">→</span>
+            <div class="flow-box">🤖 雙 AI 迴圈審查</div><span class="arrow">→</span>
+            <div class="flow-box output">科學化妥協菜單</div>
+        </div>
+    </section>
+    <section class="slide">
+        <div class="slide-header"><span class="step-badge">概念 2</span><h1 class="slide-title">基礎代謝率 (BMR) 與 TDEE</h1></div>
+        <div class="dots-line">••••••••</div>
+        <div class="main-statement">減脂不是吃越少越好，<br>攝取低於 <span class="highlight">基礎代謝率 (BMR)</span> 會導致肌肉流失。</div>
+        <div class="dashed-box">
+            <h4>系統底層採用的 Mifflin-St Jeor 公式 👇</h4>
+            <p><strong>TDEE (每日總消耗)</strong> = BMR × 活動係數（依據每週重訓天數與跑步機坡度有氧動態調整）。</p>
+        </div>
+        <div class="flow-row">
+            <div class="flow-box">體重 85kg + 重訓 3 天</div><span class="arrow">→</span>
+            <div class="flow-box output">TDEE ≈ 2,650 kcal</div>
+        </div>
+    </section>
+    <section class="slide">
+        <div class="slide-header"><span class="step-badge">概念 3</span><h1 class="slide-title">巨量營養素 (Macros) 黃金比例</h1></div>
+        <div class="dots-line">••••••••</div>
+        <div class="main-statement">熱量決定體重增減，<br>而 <span class="highlight">蛋白質克數</span> 決定你留下的是肌肉還是脂肪。</div>
+        <div class="dashed-box">
+            <h4>營養師 AI 的退件紅線 👇</h4>
+            <p>當重訓強度提高時，蛋白質攝取量必須達到 <strong>每公斤體重 1.8g ~ 2.2g</strong>。若現有食材無法達標，營養師 AI 將強制退回教練的課表！</p>
+        </div>
+        <div class="flow-row">
+            <div class="flow-box">蛋白質不足</div><span class="arrow">→</span>
+            <div class="flow-box">觸發退件機制</div><span class="arrow">→</span>
+            <div class="flow-box output">調降訓練容量</div>
+        </div>
+    </section>
+    <section class="slide">
+        <div class="slide-header"><span class="step-badge">總結</span><h1 class="slide-title">雙智能體 (Multi-Agent) 協作價值</h1></div>
+        <div class="dots-line">••••••••</div>
+        <div class="main-statement">讓「追求極限的教練」與「嚴謹保守的營養師」<br>在後台達成 <span class="highlight">動態平衡</span>。</div>
+        <div class="dashed-box">
+            <h4>準備好擴充下一個單元了嗎？ 👇</h4>
+            <p>依據專案根目錄的 <strong>AGENTS.md</strong> 規範，你可以隨時請 AI 依照相同手帳風格，自動生成 <code>lesson-02.html</code>（超商外食蛋白質指南）。</p>
+        </div>
+        <div class="flow-row">
+            <a href="index.html" class="flow-box output" style="text-decoration:none;">完成閱讀 · 返回首頁</a>
+        </div>
+    </section>
+</main>
+<div class="pagination-bar">
+    <button class="nav-btn" id="prevBtn" title="上一頁">‹</button>
+    <div class="dots-container" id="dotsContainer"></div>
+    <button class="nav-btn" id="nextBtn" title="下一頁">›</button>
+</div>
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('dotsContainer');
+    const pageIndicator = document.getElementById('pageIndicator');
+    let currentIndex = 0;
+    slides.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (idx === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
+    });
+    const dots = document.querySelectorAll('.dot');
+    function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= slides.length) index = slides.length - 1;
+        slides[currentIndex].classList.remove('active');
+        dots[currentIndex].classList.remove('active');
+        currentIndex = index;
+        slides[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
+        pageIndicator.textContent = `0${currentIndex + 1} / 0${slides.length}`;
+    }
+    document.getElementById('prevBtn').addEventListener('click', () => goToSlide(currentIndex - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goToSlide(currentIndex + 1));
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+        if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
+    });
+</script>
+</body>
+</html>
