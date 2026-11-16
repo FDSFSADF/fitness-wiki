@@ -6,14 +6,14 @@
     <title>FitAgent Lab | 體能教練 × 運動營養師知識庫</title>
     <style>
         :root {
-            --bg-color: #F9F6F0;
-            --dot-color: #DCD6C8;
-            --primary: #1E4D6B;
-            --text-main: #2C3E50;
-            --text-muted: #5D6D7E;
-            --yellow-accent: #FDE68A;
+            --bg-color: #F0F4F8;
+            --dot-color: #CBD5E1;
+            --primary: #0F2942;
+            --text-main: #1E293B;
+            --text-muted: #475569;
+            --yellow-accent: #A7F3D0;
             --blue-tape: #BAE6FD;
-            --pink-tape: #FBCFE8;
+            --pink-tape: #CBD5E1;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif; }
         body {
@@ -26,33 +26,33 @@
         }
         .container { max-width: 1080px; margin: 0 auto; }
         header { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
-        .logo-badge { background: var(--primary); color: #fff; font-weight: 800; padding: 8px 14px; border-radius: 12px; font-size: 1.1rem; letter-spacing: 1px; }
+        .logo-badge { background: var(--primary); color: #A7F3D0; font-weight: 800; padding: 8px 14px; border-radius: 12px; font-size: 1.1rem; letter-spacing: 1px; }
         .brand-title { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
-        .brand-sub { font-size: 0.85rem; color: #4A90E2; }
+        .brand-sub { font-size: 0.85rem; color: #0284C7; }
         .hero { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; flex-wrap: wrap; gap: 24px; }
         .hero-text h1 { font-size: 2.8rem; color: var(--primary); line-height: 1.25; margin-bottom: 16px; font-weight: 800; }
         .highlight { background: linear-gradient(transparent 55%, var(--yellow-accent) 55%); padding: 0 4px; }
         .hero-text p { font-size: 1.05rem; color: var(--text-muted); max-width: 560px; }
-        .hero-mascot { background: #fff; border: 2px solid var(--primary); border-radius: 24px; padding: 20px 28px; text-align: center; box-shadow: 6px 6px 0px rgba(30, 77, 107, 0.12); }
+        .hero-mascot { background: #fff; border: 2px solid var(--primary); border-radius: 24px; padding: 20px 28px; text-align: center; box-shadow: 6px 6px 0px rgba(15, 41, 66, 0.12); }
         .mascot-icon { font-size: 3.5rem; display: block; margin-bottom: 8px; }
-        .mascot-label { font-size: 0.85rem; font-weight: 700; color: var(--primary); background: var(--blue-tape); padding: 4px 12px; border-radius: 20px; }
+        .mascot-label { font-size: 0.85rem; font-weight: 700; color: var(--primary); background: var(--yellow-accent); padding: 4px 12px; border-radius: 20px; }
         .section-header { margin-bottom: 28px; }
         .section-title { font-size: 1.4rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-        .dots-divider { letter-spacing: 6px; color: #F48FB1; font-weight: bold; margin-top: 4px; }
+        .dots-divider { letter-spacing: 6px; color: #0284C7; font-weight: bold; margin-top: 4px; }
         .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-        .card { background: #FFFFFF; border: 2px solid var(--primary); border-radius: 18px; padding: 28px 24px 24px; position: relative; box-shadow: 0 8px 20px rgba(30, 77, 107, 0.06); transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(30, 77, 107, 0.12); }
-        .tape { position: absolute; top: -12px; left: 24px; width: 90px; height: 22px; opacity: 0.85; transform: rotate(-2deg); }
+        .card { background: #FFFFFF; border: 2px solid var(--primary); border-radius: 18px; padding: 28px 24px 24px; position: relative; box-shadow: 0 8px 20px rgba(15, 41, 66, 0.06); transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(15, 41, 66, 0.12); }
+        .tape { position: absolute; top: -12px; left: 24px; width: 90px; height: 22px; opacity: 0.9; transform: rotate(-2deg); border-radius: 4px; }
         .tape-blue { background-color: var(--blue-tape); }
         .tape-pink { background-color: var(--pink-tape); transform: rotate(1.5deg); }
-        .tag { display: inline-block; background: #5C9CE6; color: #fff; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; width: fit-content; }
+        .tag { display: inline-block; background: #0284C7; color: #fff; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; width: fit-content; }
         .card h2 { font-size: 1.35rem; color: var(--primary); margin-bottom: 12px; font-weight: 800; }
         .card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 24px; flex-grow: 1; }
         .meta-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-        .pill { font-size: 0.78rem; color: var(--primary); border: 1.5px solid #B0C4DE; background: #F4F8FB; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
+        .pill { font-size: 0.78rem; color: var(--primary); border: 1.5px solid #CBD5E1; background: #F8FAFC; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
         .btn-start { display: inline-block; background: var(--yellow-accent); color: var(--primary); text-decoration: none; font-weight: 800; font-size: 0.95rem; padding: 10px 20px; border-radius: 12px; border: 2px solid var(--primary); text-align: center; width: fit-content; transition: background 0.2s; }
-        .btn-start:hover { background: #FCD34D; }
-        .btn-disabled { background: #ECEFF1; color: #90A4AE; border-color: #CFD8DC; pointer-events: none; }
+        .btn-start:hover { background: #6EE7B7; }
+        .btn-disabled { background: #F1F5F9; color: #94A3B8; border-color: #CBD5E1; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -89,7 +89,7 @@
             <div>
                 <div class="meta-pills">
                     <span class="pill">4 頁簡報</span>
-                    <span class="pill">手帳風</span>
+                    <span class="pill">運動科技風</span>
                     <span class="pill">← → 翻頁</span>
                 </div>
                 <a href="lesson-01.html" class="btn-start">開始 →</a>
